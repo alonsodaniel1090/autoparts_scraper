@@ -13,9 +13,7 @@ def main():
     bs = BeautifulSoup(html.read(), 'html.parser')
     product_info = bs.find_all('div', {'class':'product-container'})
     total_products = 1264 
-
-    print('*' * 80)
-    
+ 
     # Set the list for all the products 
     products = []
 
