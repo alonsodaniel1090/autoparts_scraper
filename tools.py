@@ -2,6 +2,8 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import parts
 from info_parts import InfoParts
+import csv
+
 
 def main():
     '''Main program process'''
@@ -14,33 +16,43 @@ def main():
 
     print('*' * 80)
     
-    # Set the list of products 
+    # Set the list for all the products 
     products = []
 
     # Get all the products information
     for i in range(total_products - 1): 
    
-        # Get all the information for each product
+        # Get the information for each product
         info = str(product_info[i])
         href, href_start = parts.get_link(info)
         title = parts.get_title(info, href_start)
         price = parts.get_price(info)
 
-        # Create the objects
+        # Create the object
         product = InfoParts(title, price, href)         
+        
+        # Set a list to store the values of the object
+        product_list = []
+        product_list.append(product.get_title())
+        product_list.append(product.get_price())
+        product_list.append(product.get_link())
+        
+        # Add the list with the object values to the all products list
+        products.append(product_list)
 
-        products.append(product)
-
-    # Print the products
-    for prod in products:
-        print(prod.get_title())
-        print(prod.get_price())
-        print(prod.get_link())
-        print('*' * 80)
+    create_csv_file(products)
 
 
 
 
+
+
+def create_csv_file(products):
+    with open('products.csv', 'w', encoding='utf-8') as csvfile:
+        filewriter = csv.writer(csvfile, delimiter=',')
+        for prod in products:
+            filewriter.writerow(prod)
+    print('File created!')
 
     
 
