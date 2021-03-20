@@ -40,19 +40,12 @@ def main():
         # Add the list with the object values to the all products list
         products.append(product_list)
 
-    create_csv_file(products)
+    # Create the file with the results
+    parts.create_csv_file(products)
 
 
 
 
-
-
-def create_csv_file(products):
-    with open('products.csv', 'w', encoding='utf-8') as csvfile:
-        filewriter = csv.writer(csvfile, delimiter=',')
-        for prod in products:
-            filewriter.writerow(prod)
-    print('File created!')
 
     
 

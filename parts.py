@@ -3,6 +3,8 @@ Helper functions to extract
 the information from a 
 website with BeautifulSoup
 '''
+import csv
+
 
 def get_link(info):
     '''
@@ -38,6 +40,16 @@ def get_price(info):
     return price.strip()
 
 
-
+def create_csv_file(products):
+    '''
+    Create a CSV file with
+    a the list of products
+    passed as an argument.
+    '''
+    with open('products.csv', 'w', encoding='utf-8') as csvfile:
+        filewriter = csv.writer(csvfile, delimiter=',')
+        for prod in products:
+            filewriter.writerow(prod)
+    print('File created!')
 
 
